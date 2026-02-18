@@ -164,7 +164,9 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
   .pulse-item{padding:4px 10px;font-size:12px}
   .richter-row{grid-template-columns:120px 1fr 60px;gap:8px}
   .narrative-card{padding:20px 18px}
-  .subscribe-form{flex-direction:column}
+  .subscribe-bar-inner{flex-direction:column;gap:8px}
+  .subscribe-bar-form{width:100%;justify-content:center}
+  .subscribe-bar-form input[type="email"]{flex:1;min-width:0}
 }
 
 /* Light theme */
@@ -175,8 +177,7 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 }
 [data-theme="light"] .narrative-card,
 [data-theme="light"] .summary-card,
-[data-theme="light"] .richter-card,
-[data-theme="light"] .subscribe-card{background:linear-gradient(135deg,#fff,#f6f8fa);box-shadow:0 8px 32px rgba(0,0,0,.06)}
+[data-theme="light"] .richter-card{background:linear-gradient(135deg,#fff,#f6f8fa);box-shadow:0 8px 32px rgba(0,0,0,.06)}
 [data-theme="light"] .section{border-color:var(--border)}
 [data-theme="light"] .t th:first-child,
 [data-theme="light"] .t td:first-child{box-shadow:2px 0 8px rgba(0,0,0,.06)}
@@ -197,18 +198,18 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 .theme-toggle{position:absolute;right:20px;top:20px;background:var(--surface-2);border:1px solid var(--border);color:var(--text-m);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:18px;line-height:1;transition:all .15s}
 .theme-toggle:hover{color:var(--text);border-color:var(--border-lt)}
 
-/* Subscribe card */
-.subscribe-card{background:linear-gradient(135deg,#0d1117,#161b22);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-top:8px;margin-bottom:32px;box-shadow:0 8px 32px rgba(0,0,0,.3);text-align:center}
-.subscribe-card h3{font-size:20px;font-weight:600;margin-bottom:6px}
-.subscribe-card p{font-size:14px;color:var(--text-m);margin-bottom:16px}
-.subscribe-form{display:flex;gap:8px;max-width:420px;margin:0 auto}
-.subscribe-form input[type="email"]{flex:1;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px;outline:none;transition:border-color .15s}
-.subscribe-form input[type="email"]:focus{border-color:var(--blue)}
-.subscribe-form input[type="email"]::placeholder{color:var(--text-d)}
-.subscribe-btn{padding:10px 20px;border-radius:8px;border:none;background:var(--blue);color:#fff;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .15s}
+/* Subscribe bar */
+.subscribe-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 20px}
+.subscribe-bar-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.subscribe-bar-text{font-size:13px;color:var(--text-m);white-space:nowrap}
+.subscribe-bar-form{display:flex;gap:6px;align-items:center}
+.subscribe-bar-form input[type="email"]{padding:7px 12px;border-radius:6px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:13px;outline:none;transition:border-color .15s;width:200px}
+.subscribe-bar-form input[type="email"]:focus{border-color:var(--blue)}
+.subscribe-bar-form input[type="email"]::placeholder{color:var(--text-d)}
+.subscribe-btn{padding:7px 16px;border-radius:6px;border:none;background:var(--blue);color:#fff;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .15s}
 .subscribe-btn:hover{opacity:.9}
 .subscribe-btn:disabled{opacity:.6;cursor:not-allowed}
-.subscribe-msg{margin-top:12px;font-size:13px;min-height:20px}
+.subscribe-msg{font-size:12px;min-height:0}
 .subscribe-msg.success{color:var(--green)}
 .subscribe-msg.error{color:var(--red)}
 </style>
@@ -227,20 +228,21 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
   </header>
   <div class="pulse" id="pulse"></div>
 </div>
-<main class="container">
-  <div id="narrative"></div>
-  <div id="summary"></div>
-  <div id="sections"></div>
-  <div id="richter"></div>
-  <div id="subscribe" class="subscribe-card">
-    <h3>Stay in the Loop</h3>
-    <p>Get the Titan Index delivered to your inbox each month.</p>
-    <form class="subscribe-form" id="subscribe-form">
+<div class="subscribe-bar" id="subscribe">
+  <div class="subscribe-bar-inner">
+    <span class="subscribe-bar-text">Get the Titan Index delivered monthly &mdash;</span>
+    <form class="subscribe-bar-form" id="subscribe-form">
       <input type="email" id="subscribe-email" placeholder="you@example.com" required>
       <button type="submit" class="subscribe-btn">Subscribe</button>
     </form>
     <div class="subscribe-msg" id="subscribe-msg"></div>
   </div>
+</div>
+<main class="container">
+  <div id="narrative"></div>
+  <div id="summary"></div>
+  <div id="sections"></div>
+  <div id="richter"></div>
 </main>
 
 <div class="modal-overlay" id="modal">
